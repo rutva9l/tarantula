@@ -4,6 +4,9 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
+  httpAgentOptions: {
+    keepAlive: false,
+  }
 }
 
 export default nextConfig
