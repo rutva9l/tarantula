@@ -50,9 +50,9 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        gridTemplateColumns:
+        gridTemplateRows:
         {
-          '30/50': '30% 30% 20%',
+          'auto': 'auto 1fr',
         },
       },
       borderRadius: {
