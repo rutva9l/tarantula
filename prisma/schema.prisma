@@ -10,29 +10,82 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// model Profile {
+//   id     Int     @id @default(autoincrement())
+//   bio    String?
+//   name   String?
+//   userId Int     @unique
+//   User   User    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+// }
+
+// model User {
+//   id      Int      @id @default(autoincrement())
+//   email   String   @unique @db.VarChar(255)
+//   name    String   @unique @db.VarChar(255)
+//   Grain   Grain[]
+//   Profile Profile?
+// }
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id")
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime? @map("email_verified")
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  grains        Grain[]
+  username      String?   @unique
+
+  @@map("users")
+}
+
 model Grain {
-  id        Int      @id @default(autoincrement())
+  grainId   Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime
   title     String   @db.VarChar(255)
   content   String?
   published Boolean  @default(false)
-  authorId  Int
-  User      User     @relation(fields: [authorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  userId    String   @map("user_id")
+  user      User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
-model Profile {
-  id     Int     @id @default(autoincrement())
-  bio    String?
-  name   String?
-  userId Int     @unique
-  User   User    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-}
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
 
-model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique @db.VarChar(255)
-  name    String   @unique @db.VarChar(255)
-  Grain   Grain[]
-  Profile Profile?
+  @@unique([identifier, token])
+  @@map("verificationtokens")
 }
