@@ -76,3 +76,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+.comment .AvatarRoot{
+  width: 30px;
+  height: 30px;
+}
