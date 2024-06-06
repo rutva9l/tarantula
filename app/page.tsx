@@ -5,16 +5,17 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { SignIn } from "@/components/signIn"
 import { getAuthSession } from "@/lib/authOptions"
+import DashboardLayout from "@/components/dashboard-layout"
+import Feed from "@/components/feed"
+import Search from "@/components/search"
 
 const IndexPage = async () => {
   const session = await getAuthSession()
   console.log(session)
 
   return (
-    <section className="container w-full h-full flex justify-center items-center pb-8 pt-6 md:py-10">
-      <div>Sign in</div>
-      {session ?  "This is dashboard" : <SignIn />}
-      {/* <SignIn /> */}
+    <section className="container w-full h-full flex justify-center items-center px-0">
+      {session ?  <DashboardLayout first_element={<Feed type="feed" />} second_element={<Search />} />: <SignIn />}
     </section>
   )
 }

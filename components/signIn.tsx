@@ -18,7 +18,8 @@ export function SignIn() {
     const handleSubmit = async () => {
         console.log("submitted")
         try {
-          await signIn('google')
+          const res = await signIn('google')
+          console.log(res)
         } catch (error) {
           console.log(error)
         }

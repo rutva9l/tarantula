@@ -9,16 +9,20 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import Link from "next/link";
-import { Input } from "@/components/ui/input"
-import { Home, User, Settings, MessageSquare } from "lucide-react";
+import { Button, buttonVariants } from "@/components/ui/button";
 import Post from "@/components/post";
-import DashboardMenu from "@/components/menu";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog"
+import { Textarea } from "./ui/textarea";
 
-const Feed = ({type}:String) => {
+const Feed = ({ type }: String) => {
     return (
         <Card className="col-span-5">
             <CardHeader>
@@ -26,8 +30,27 @@ const Feed = ({type}:String) => {
             </CardHeader>
             <CardContent>
                 {type == "feed" ? <>
-                <Post type="collapsed" />
-                <Post type="collapsed" /></> : <Post type="expanded" />
+                    <Dialog>
+                        <DialogTrigger asChild>
+                            <Button className={buttonVariants({ variant: "constructive" }) + " mb-4 py-3 px-4"}>Create Post</Button>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-[50%]">
+                            <DialogHeader>
+                                <DialogTitle>Your Post</DialogTitle>
+                                <DialogDescription>
+                                    Write down your thoughts here, let your friends know what you're thinking.
+                                </DialogDescription>
+                            </DialogHeader>
+                            <div className="grid gap-4 py-2">
+                                <Textarea placeholder="Write here..." />
+                            </div>
+                            <DialogFooter>
+                                <Button type="submit">Create</Button>
+                            </DialogFooter>
+                        </DialogContent>
+                    </Dialog>
+                    <Post type="collapsed" />
+                    <Post type="collapsed" /></> : <Post type="expanded" />
                 }
             </CardContent>
         </Card>
