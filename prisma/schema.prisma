@@ -10,22 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// model Profile {
-//   id     Int     @id @default(autoincrement())
-//   bio    String?
-//   name   String?
-//   userId Int     @unique
-//   User   User    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-// }
-
-// model User {
-//   id      Int      @id @default(autoincrement())
-//   email   String   @unique @db.VarChar(255)
-//   name    String   @unique @db.VarChar(255)
-//   Grain   Grain[]
-//   Profile Profile?
-// }
-
 model Account {
   id                String  @id @default(cuid())
   userId            String  @map("user_id")
@@ -66,19 +50,33 @@ model User {
   sessions      Session[]
   grains        Grain[]
   username      String?   @unique
+  Comment       Comment[]
 
   @@map("users")
 }
 
 model Grain {
-  grainId   Int      @id @default(autoincrement())
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  content   Json?
+  comments  Comment[]
+
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id])
+}
+
+model Comment {
+  id        String   @id @default(cuid())
   createdAt DateTime @default(now())
-  updatedAt DateTime
-  title     String   @db.VarChar(255)
-  content   String?
-  published Boolean  @default(false)
-  userId    String   @map("user_id")
-  user      User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  content   String
+  author    User     @relation(fields: [userId], references: [id])
+  authorId  String
+  post      Grain    @relation(fields: [grainId], references: [id])
+  postId    String
+  userId    String
+  grainId   String
+  commentId String?
 }
 
 model VerificationToken {

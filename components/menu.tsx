@@ -7,6 +7,7 @@ import { Button } from "./ui/button";
 import { Home, User, Settings } from "lucide-react"
 import Link from "next/link";
 import AvatarSet from "./avatar"
+import { signOut } from "next-auth/react";
 
 const DashboardMenu = (props:any) => {
     const menuList: MenuItem[] = [
@@ -19,6 +20,14 @@ const DashboardMenu = (props:any) => {
         console.log("active", text)
       }
 
+      const handleSignOut = async () => {
+        try {
+          await signOut('google')
+        } catch(error){
+          console.log(error)
+        }
+      }
+
     return (
         <Card className="col-span-2">
         <CardHeader>
@@ -28,7 +37,7 @@ const DashboardMenu = (props:any) => {
           {menuList.map(item => <Link href="/"><div key={item.text} onClick={() => handleActive(item.text)} className="flex p-2 hover:bg-gray-50 dark:hover:bg-[#1d283a] rounded-md py-3 px-2">{item.element} {item.text}</div></Link>)}
         </CardContent>
         <CardFooter>
-          <Button>Sign Out</Button>
+          <Button onClick={handleSignOut}>Sign Out</Button>
         </CardFooter>
       </Card>
     )

@@ -25,32 +25,16 @@ export function SignIn() {
         }
       }
     return (
-        <Card className="w-full md:w-[30%]">
+        <Card className="w-full md:w-[30%] mt-8">
             <CardHeader>
                 <CardTitle>Login</CardTitle>
             </CardHeader>
             <CardContent>
                 <Button className="w-full" onClick={handleSubmit}>Google Account</Button>
-                <Separator className="my-2" />
-                {/* <form onSubmit={handleSubmit}>
-            <div className="flex flex-col">
-              <div className="pb-2 w-full">
-                <Label htmlFor="name">Username or Email</Label>
-                <Input id="name" />
-              </div>
-              <div className="pb-4 w-full">
-                <Label htmlFor="password">Password</Label>
-                <Input id="password" />
-              </div>
-              <Button type="submit" className="self-center pb-2">
-                Login
-              </Button>
-            </div>
-          </form>
-          <Separator className="my-2" /> */}
+                <Separator className="mt-2" />
             </CardContent>
-            <CardFooter>
-                Don't have an account? <Link href=""> Register</Link>
+            <CardFooter className="pb-2">
+                By logging in, you agree to give us all your info. Data privacy is not a thing we follow in this company.
             </CardFooter>
         </Card>
     )
