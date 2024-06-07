@@ -12,8 +12,21 @@ import {
 import { Button, buttonVariants } from "@/components/ui/button";
 import Post from "@/components/post";
 import CreatePost from "./create-post";
+import { useEffect, useState } from "react"
+import axios from "axios"
 
-const Feed = ({ type }: string) => {
+interface Posts {
+    id: string,
+    content: any,
+    authorId: string,
+    createdAt: string,
+    updatedAt: string
+}
+
+
+const Feed = async ({ type }: { type: string }) => {
+    // const posts = await getDogs()
+    // console.log(posts)
     return (
         <Card className="col-span-5">
             <CardHeader>
@@ -23,7 +36,8 @@ const Feed = ({ type }: string) => {
                 {type == "feed" ? <>
                     <CreatePost />
                     <Post type="collapsed" />
-                    <Post type="collapsed" /></> : <Post type="expanded" />
+                    <Post type="collapsed" />
+                </> : <Post type="expanded" />
                 }
             </CardContent>
         </Card>

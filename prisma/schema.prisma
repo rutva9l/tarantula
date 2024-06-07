@@ -51,6 +51,7 @@ model User {
   grains        Grain[]
   username      String?   @unique
   Comment       Comment[]
+  createdAt     DateTime  @default(now())
 
   @@map("users")
 }

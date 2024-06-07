@@ -25,7 +25,7 @@ export function SignIn() {
         }
       }
     return (
-        <Card className="w-full md:w-[30%] mt-8">
+        <Card className="mt-8 w-full md:w-[30%]">
             <CardHeader>
                 <CardTitle>Login</CardTitle>
             </CardHeader>

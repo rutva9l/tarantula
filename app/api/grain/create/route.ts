@@ -26,7 +26,7 @@ export async function POST(req: Request) {
             },
         })
 
-        return new Response(post.content)
+        return new Response(JSON.stringify(post.content))
     } catch (error) {
         if (error instanceof z.ZodError) {
             return new Response(error.message, { status: 422 })

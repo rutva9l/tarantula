@@ -15,7 +15,7 @@ const IndexPage = async () => {
   console.log(session)
 
   return (
-    <section className="container w-full h-full flex justify-center items-center px-0">
+    <section className="container flex h-full w-full items-center justify-center px-0">
       {session ?  <DashboardLayout first_element={<Feed type="feed" />} second_element={<Search />} />: <SignIn />}
     </section>
   )

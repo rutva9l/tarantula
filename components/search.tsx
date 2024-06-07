@@ -10,16 +10,16 @@ const Search = () =>{
         <CardHeader>
           <Input
             placeholder="Search..."
-            className="max-w-sm m-0"
+            className="m-0 max-w-sm"
           />
         </CardHeader>
         <CardContent>
           <Button className="w-full">Google Account</Button>
           <Separator className="my-2" />
         </CardContent>
-        <CardFooter>
+        {/* <CardFooter>
           Don't have an account? <Link href=""> Register</Link>
-        </CardFooter>
+        </CardFooter> */}
       </Card>
     )
 }

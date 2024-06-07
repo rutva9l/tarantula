@@ -34,7 +34,7 @@ const DashboardMenu = (props:any) => {
           <AvatarSet type="profile" />
         </CardHeader>
         <CardContent>
-          {menuList.map(item => <Link href="/"><div key={item.text} onClick={() => handleActive(item.text)} className="flex p-2 hover:bg-gray-50 dark:hover:bg-[#1d283a] rounded-md py-3 px-2">{item.element} {item.text}</div></Link>)}
+          {menuList.map(item => <Link href="/"><div key={item.text} onClick={() => handleActive(item.text)} className="flex rounded-md p-2 py-3 hover:bg-gray-50 dark:hover:bg-[#1d283a]">{item.element} {item.text}</div></Link>)}
         </CardContent>
         <CardFooter>
           <Button onClick={handleSignOut}>Sign Out</Button>

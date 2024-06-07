@@ -24,10 +24,10 @@ const Profile = () => {
         <Card className="col-span-5">
             <CardHeader><CardTitle>Profile</CardTitle></CardHeader>
             <CardContent>
-                <div className="flex items-center justify-between mb-3">
+                <div className="mb-3 flex items-center justify-between">
                     <div>
                         <AvatarSet type="profile" />
-                        <div className="text-sm mt-2">@session.user.username</div>
+                        <div className="mt-2 text-sm">@session.user.username</div>
                     </div>
                     <Dialog>
                         <DialogTrigger asChild>
@@ -37,7 +37,7 @@ const Profile = () => {
                             <DialogHeader>
                                 <DialogTitle>Edit profile</DialogTitle>
                                 <DialogDescription>
-                                    Make changes to your profile here. Click save when you're done.
+                                    {`Make changes to your profile here. Click save when you're done.`}
                                 </DialogDescription>
                             </DialogHeader>
                             <div className="grid gap-4 py-4">
