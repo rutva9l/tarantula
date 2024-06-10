@@ -31,10 +31,10 @@ const DashboardMenu = (props:any) => {
     return (
         <Card className="col-span-2">
         <CardHeader>
-          <AvatarSet type="profile" />
+          <AvatarSet type="profile" user={props.user} />
         </CardHeader>
         <CardContent>
-          {menuList.map(item => <Link href="/"><div key={item.text} onClick={() => handleActive(item.text)} className="flex rounded-md p-2 py-3 hover:bg-gray-50 dark:hover:bg-[#1d283a]">{item.element} {item.text}</div></Link>)}
+          {menuList.map(item => <Link key={item.text} href="/"><div onClick={() => handleActive(item.text)} className="flex rounded-md p-2 py-3 hover:bg-gray-50 dark:hover:bg-[#1d283a]">{item.element} {item.text}</div></Link>)}
         </CardContent>
         <CardFooter>
           <Button onClick={handleSignOut}>Sign Out</Button>

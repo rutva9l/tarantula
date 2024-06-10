@@ -7,21 +7,25 @@ import { Button } from './ui/button'
 import AvatarSet from "./avatar"
 import Comment from "./comment"
 import Link from "next/link"
+import { Posts } from "@/types/post"
+import axios from "axios"
 
+const getUser = async (userId: string) => {
+    const { data } = await axios.get('http://localhost:3000/api/user/'+userId)
+    return data
+}
 
-
-const Post = (type: string) => {
+const Post = async ({ type, post }: { type: String, post: Posts}) => {
+    const user = await getUser(post.authorId)
 
     return (
         <Card className="mb-2">
             <CardHeader>
-                <AvatarSet type="profile"/>
+                <AvatarSet type="profile" user={user} />
             </CardHeader>
-            <Link href="/post">
+            <Link href={"/post/"+post.id}>
                 <CardContent className="cursor-pointer">
-                    <div>{`This is card content.
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                        It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum`}
+                    <div>{post.content}
                     </div>
                 </CardContent>
             </Link>

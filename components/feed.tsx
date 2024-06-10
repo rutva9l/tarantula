@@ -14,31 +14,29 @@ import Post from "@/components/post";
 import CreatePost from "./create-post";
 import { useEffect, useState } from "react"
 import axios from "axios"
+import { Posts } from "@/types/post";
+import { useRouter } from 'next/router';
 
-interface Posts {
-    id: string,
-    content: any,
-    authorId: string,
-    createdAt: string,
-    updatedAt: string
+const getData = async () => {
+    const { data } = await axios.get('http://localhost:3000/api/grain')
+    return data as Posts[]
 }
 
-
 const Feed = async ({ type }: { type: string }) => {
-    // const posts = await getDogs()
-    // console.log(posts)
+    const data = await getData()
+
+    // const router = useRouter()
+
+    // const singlePost: Posts = data.forEach(item=>{ return item.authorId = router.query.postId?})
+
     return (
         <Card className="col-span-5">
             <CardHeader>
-                <CardTitle>{type == "feed" ? "Your Feed" : "Post"}</CardTitle>
+                <CardTitle>Your Feed</CardTitle>
             </CardHeader>
             <CardContent>
-                {type == "feed" ? <>
                     <CreatePost />
-                    <Post type="collapsed" />
-                    <Post type="collapsed" />
-                </> : <Post type="expanded" />
-                }
+                    {data.map(item => <Post type="collapsed" key={item.id} post={item} />)}
             </CardContent>
         </Card>
     )

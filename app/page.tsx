@@ -12,11 +12,10 @@ import { useEffect, useState } from "react"
 
 const IndexPage = async () => {
   const session = await getAuthSession()
-  console.log(session)
 
   return (
     <section className="container flex h-full w-full items-center justify-center px-0">
-      {session ?  <DashboardLayout first_element={<Feed type="feed" />} second_element={<Search />} />: <SignIn />}
+      {session ?  <DashboardLayout user={session.user} first_element={<Feed type="feed" />} second_element={<Search />} />: <SignIn />}
     </section>
   )
 }

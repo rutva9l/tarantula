@@ -16,7 +16,6 @@ import Link from "next/link"
 
 export function SignIn() {
     const handleSubmit = async () => {
-        console.log("submitted")
         try {
           const res = await signIn('google')
           console.log(res)

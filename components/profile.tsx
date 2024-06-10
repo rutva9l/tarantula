@@ -17,9 +17,17 @@ import {
 } from "@/components/ui/dialog"
 import { Label } from "./ui/label"
 import { Input } from "./ui/input"
+import axios from "axios"
+
+const getUser = async (userId: string) => {
+    const { data } = await axios.get('http://localhost:3000/api/user/'+userId)
+    return data
+}
 
 
-const Profile = () => {
+const Profile = async ({userId}: {userId: string}) => {
+    const user = await getUser(userId)
+
     return (
         <Card className="col-span-5">
             <CardHeader><CardTitle>Profile</CardTitle></CardHeader>
@@ -37,7 +45,7 @@ const Profile = () => {
                             <DialogHeader>
                                 <DialogTitle>Edit profile</DialogTitle>
                                 <DialogDescription>
-                                    {`Make changes to your profile here. Click save when you're done.`}
+                                    Make changes to your profile here. Click save when you're done.
                                 </DialogDescription>
                             </DialogHeader>
                             <div className="grid gap-4 py-4">
@@ -72,8 +80,8 @@ const Profile = () => {
                     <CalendarDays size={16} className="mr-1" /> <div className="text-xs text-slate-200">Joined May 2024</div>
                 </div>
                 <Separator className="h-[1px]" />
-                <Post type="feed" />
-                <Post type="feed" />
+                {/* <Post type="feed" />
+                <Post type="feed" /> */}
             </CardContent>
         </Card>
     )

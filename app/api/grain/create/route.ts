@@ -14,11 +14,6 @@ export async function POST(req: Request) {
         const body = await req.json()
         const { content } = PostValidator.parse(body)
 
-        console.log({
-            authorId: session.user.id,
-            content,
-        })
-
         const post = await db.grain.create({
             data: {
                 content,
@@ -32,6 +27,6 @@ export async function POST(req: Request) {
             return new Response(error.message, { status: 422 })
         }
 
-        return new Response(error ? error.message : "Could not post", { status: 500 })
+        return new Response("Could not post", { status: 500 })
     }
 }

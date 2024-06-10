@@ -6,6 +6,6 @@ export async function GET() {
 
         return new Response(JSON.stringify(posts))
     } catch (error) {
-        return new Response(error? error?.message : "Could not retrieve.", {status: 500})
+        return new Response("Could not retrieve.", { status: 500 })
     }
 }
