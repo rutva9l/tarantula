@@ -39,7 +39,7 @@ const CreatePost = () => {
                 <DialogHeader>
                     <DialogTitle>Your Post</DialogTitle>
                     <DialogDescription>
-                        Write down your thoughts here, let your friends know what you're thinking.
+                        Write down your thoughts here, let your friends know what you&apos;re thinking.
                     </DialogDescription>
                 </DialogHeader>
                 <div className="grid gap-4 py-2">

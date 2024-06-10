@@ -14,7 +14,7 @@ const IndexPage = async () => {
   const session = await getAuthSession()
 
   return (
-    <section className="container flex h-full w-full items-center justify-center px-0">
+    <section className={session ? "": "container flex items-center justify-center h-full w-full px-0"}>
       {session ?  <DashboardLayout user={session.user} first_element={<Feed type="feed" />} second_element={<Search />} />: <SignIn />}
     </section>
   )

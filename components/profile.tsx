@@ -18,15 +18,27 @@ import {
 import { Label } from "./ui/label"
 import { Input } from "./ui/input"
 import axios from "axios"
+import { Posts } from "@/types/post"
 
 const getUser = async (userId: string) => {
     const { data } = await axios.get('http://localhost:3000/api/user/'+userId)
     return data
 }
 
+const getUserPosts = async (userId: string) => {
+    const { data } = await axios.get('http://localhost:3000/api/grain/'+userId)
+    if (data.length > 1){
+        return data as Posts[]
+    }
+    else {
+        return [data] as Posts[]
+    }
+}
+
 
 const Profile = async ({userId}: {userId: string}) => {
     const user = await getUser(userId)
+    const userPosts = await getUserPosts(userId)
 
     return (
         <Card className="col-span-5">
@@ -34,8 +46,8 @@ const Profile = async ({userId}: {userId: string}) => {
             <CardContent>
                 <div className="mb-3 flex items-center justify-between">
                     <div>
-                        <AvatarSet type="profile" />
-                        <div className="mt-2 text-sm">@session.user.username</div>
+                        <AvatarSet type="profile" user={user} />
+                        <div className="mt-2 text-sm">@{user.username}</div>
                     </div>
                     <Dialog>
                         <DialogTrigger asChild>
@@ -45,7 +57,7 @@ const Profile = async ({userId}: {userId: string}) => {
                             <DialogHeader>
                                 <DialogTitle>Edit profile</DialogTitle>
                                 <DialogDescription>
-                                    Make changes to your profile here. Click save when you're done.
+                                    Make changes to your profile here. Click save when you&apos;re done.
                                 </DialogDescription>
                             </DialogHeader>
                             <div className="grid gap-4 py-4">
@@ -80,8 +92,7 @@ const Profile = async ({userId}: {userId: string}) => {
                     <CalendarDays size={16} className="mr-1" /> <div className="text-xs text-slate-200">Joined May 2024</div>
                 </div>
                 <Separator className="h-[1px]" />
-                {/* <Post type="feed" />
-                <Post type="feed" /> */}
+                <div className="mt-4">{userPosts.map(item => <Post type="collapsed" key={item.id} post={item} />)}</div>
             </CardContent>
         </Card>
     )

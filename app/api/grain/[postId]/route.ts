@@ -8,9 +8,18 @@ export async function GET(
         const { postId } = params;
         const post = await db.grain.findFirst({
             where: {
-                id: {
-                    equals: postId
-                }
+                OR: [
+                    {
+                        id: {
+                            equals: postId
+                        }
+                    },
+                    {
+                        authorId: {
+                            equals: postId
+                        }
+                    }
+                ]
             }
         })
         return new Response(JSON.stringify(post))

@@ -33,7 +33,7 @@ export function SignIn() {
                 <Separator className="mt-2" />
             </CardContent>
             <CardFooter className="pb-2">
-                By logging in, you agree to give us all your info. Data privacy is not a thing we follow in this company.
+                By logging in, you agree to the Terms & Conditions and our Privacy Policies.
             </CardFooter>
         </Card>
     )
