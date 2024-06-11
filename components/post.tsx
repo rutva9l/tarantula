@@ -35,11 +35,10 @@ const Post = async ({ type, post }: { type: String, post: Posts}) => {
             <Separator />
             {type == "expanded" ? <div className="p-3">
                 <CommentInput id={post.id} />
-                <Comment />
-                <Comment />
+                {post.comments.map(item => <Comment key={item.id} comment={item} />)}
             </div> : <CardFooter className="py-3">
-                <Link href="/post">
-                    <div className="flex cursor-pointer items-center"><MessageSquare size={20} className="mr-2" /> 6 comments</div>
+                <Link href={"/post/"+post.id}>
+                    <div className="flex cursor-pointer items-center"><MessageSquare size={20} className="mr-2" /> {post.comments ? post.comments.length: "0"} comments</div>
                 </Link>
             </CardFooter>}
         </Card>

@@ -6,6 +6,7 @@ import Search from '@/components/search';
 const PostPage = ({ params }: { params: { slug: string } }) => {
     return (
         <section>
+            {/* @ts-expect-error Server Component */}
             <DashboardLayout first_element={<FullPost params={params} />} second_element={<></>} />
         </section>
     )

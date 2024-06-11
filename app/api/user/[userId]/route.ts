@@ -11,6 +11,9 @@ export async function GET(
                 id: {
                     equals: userId
                 }
+            },
+            include: {
+                grains: true
             }
         })
         return new Response(JSON.stringify(user))

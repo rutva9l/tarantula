@@ -27,9 +27,8 @@ const CommentInput = ({ id }: { id: string }) => {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Leave a comment"
                 className="col-span-8 m-0 mb-4 w-full"
-                defaultValue="comment"
             />
-            <Button className="col-span-1 ml-4 h-9" size="icon"><Forward onClick={() => createComment} size={20} /></Button>
+            <Button className="col-span-1 ml-4 h-9" disabled={input.length === 0} onClick={() => createComment()}><Forward size={20} /></Button>
         </div>
     )
 }

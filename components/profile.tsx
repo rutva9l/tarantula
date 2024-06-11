@@ -18,27 +18,16 @@ import {
 import { Label } from "./ui/label"
 import { Input } from "./ui/input"
 import axios from "axios"
-import { Posts } from "@/types/post"
+import { UserType } from "@/types/user"
 
 const getUser = async (userId: string) => {
     const { data } = await axios.get('http://localhost:3000/api/user/'+userId)
-    return data
-}
-
-const getUserPosts = async (userId: string) => {
-    const { data } = await axios.get('http://localhost:3000/api/grain/'+userId)
-    if (data.length > 1){
-        return data as Posts[]
-    }
-    else {
-        return [data] as Posts[]
-    }
+    return data as UserType
 }
 
 
 const Profile = async ({userId}: {userId: string}) => {
     const user = await getUser(userId)
-    const userPosts = await getUserPosts(userId)
 
     return (
         <Card className="col-span-5">
@@ -89,10 +78,10 @@ const Profile = async ({userId}: {userId: string}) => {
                     </Dialog>
                 </div>
                 <div className="flex items-center">
-                    <CalendarDays size={16} className="mr-1" /> <div className="text-xs text-slate-200">Joined May 2024</div>
+                    <CalendarDays size={16} className="mr-1" /> <div className="text-xs text-zinc-900 dark:text-slate-50 p-2">Joined May 2024</div>
                 </div>
                 <Separator className="h-[1px]" />
-                <div className="mt-4">{userPosts.map(item => <Post type="collapsed" key={item.id} post={item} />)}</div>
+                <div className="mt-4">{user.grains.map(item => <Post type="collapsed" key={item.id} post={item} />)}</div>
             </CardContent>
         </Card>
     )

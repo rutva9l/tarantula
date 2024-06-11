@@ -20,6 +20,13 @@ export async function GET(
                         }
                     }
                 ]
+            },
+            include: {
+                comments: {
+                    include: {
+                        author: true
+                    }
+                }
             }
         })
         return new Response(JSON.stringify(post))

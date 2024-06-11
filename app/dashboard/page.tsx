@@ -6,6 +6,9 @@ import Search from "@/components/search";
 export default function Dashboard() {
 
   return (
-    <DashboardLayout first_element={<Feed type="feed" />} second_element={<Search />} />
+    <>
+      {/* @ts-expect-error Server Component */}
+      <DashboardLayout first_element={<Feed type="feed" />} second_element={<Search />} />
+    </>
   )
 }

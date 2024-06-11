@@ -2,7 +2,11 @@ import { db } from "@/lib/db"
 
 export async function GET() {
     try {
-        const posts = await db.grain.findMany()
+        const posts = await db.grain.findMany({
+            include: {
+                comments: true
+            }
+        })
 
         return new Response(JSON.stringify(posts))
     } catch (error) {
