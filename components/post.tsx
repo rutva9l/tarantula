@@ -1,3 +1,5 @@
+"use client"
+
 import { Card, CardHeader, CardContent, CardTitle, CardFooter } from "./ui/card"
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar"
 import { Separator } from "./ui/separator"
@@ -9,6 +11,7 @@ import Comment from "./comment"
 import Link from "next/link"
 import { Posts } from "@/types/post"
 import axios from "axios"
+import CommentInput from "./comment-input"
 
 const getUser = async (userId: string) => {
     const { data } = await axios.get('http://localhost:3000/api/user/'+userId)
@@ -31,13 +34,7 @@ const Post = async ({ type, post }: { type: String, post: Posts}) => {
             </Link>
             <Separator />
             {type == "expanded" ? <div className="p-3">
-                <div className="grid grid-cols-9">
-                    <Input
-                        placeholder="Leave a comment"
-                        className="col-span-8 m-0 mb-4 w-full"
-                    />
-                    <Button className="col-span-1 ml-4 h-9" size="icon"><Forward size={20} /></Button>
-                </div>
+                <CommentInput id={post.id} />
                 <Comment />
                 <Comment />
             </div> : <CardFooter className="py-3">

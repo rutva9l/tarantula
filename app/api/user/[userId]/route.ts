@@ -15,7 +15,7 @@ export async function GET(
         })
         return new Response(JSON.stringify(user))
     } catch (error) {
-        return new Response(error, { status: 500 })
+        return new Response("Could not retrieve.", { status: 500 })
 
     }
 }
