@@ -26,7 +26,8 @@ export async function GET(
                     include: {
                         author: true
                     }
-                }
+                },
+                author: true
             }
         })
         return new Response(JSON.stringify(post))

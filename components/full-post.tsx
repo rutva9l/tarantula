@@ -12,6 +12,7 @@ const getData = async (id: string) => {
 
 const FullPost = async ({ params }: {params: any}) => {
     const data = await getData(params.postId)
+    console.log(data)
 
     return (
         <Card className="col-span-5">

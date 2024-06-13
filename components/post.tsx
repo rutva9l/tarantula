@@ -12,19 +12,22 @@ import Link from "next/link"
 import { Posts } from "@/types/post"
 import axios from "axios"
 import CommentInput from "./comment-input"
+import { UserType } from "@/types/user"
+import { FC } from "react"
 
-const getUser = async (userId: string) => {
-    const { data } = await axios.get('http://localhost:3000/api/user/'+userId)
-    return data
+interface PostProps{
+    post: Posts & {
+        author: UserType
+    },
+    type: String
 }
 
-const Post = async ({ type, post }: { type: String, post: Posts}) => {
-    const user = await getUser(post.authorId)
+const Post: FC<PostProps> = async ({ type, post }) => {
 
     return (
         <Card className="mb-2">
             <CardHeader>
-                <AvatarSet type="profile" user={user} />
+                <AvatarSet type="profile" user={post.author} />
             </CardHeader>
             <Link href={"/post/"+post.id}>
                 <CardContent className="cursor-pointer">

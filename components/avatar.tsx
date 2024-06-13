@@ -2,7 +2,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar"
 import { CardTitle } from "./ui/card"
 import Link from "next/link"
 
-const AvatarSet = async (props: any) => {
+const AvatarSet = (props: any) => {
 
     return (
         <Link href={props.user ? ('/profile/'+props.user.id) : '/'}>

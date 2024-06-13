@@ -16,7 +16,7 @@ const IndexPage = async () => {
   return (
     <section className={session ? "": "container flex items-center justify-center h-full w-full px-0"}>
       {/* @ts-expect-error Server Component */}
-      {session ?  <DashboardLayout user={session.user} first_element={<Feed type="feed" />} second_element={<Search />} />: <SignIn />}
+      {session ?  <DashboardLayout first_element={<Feed type="feed" />} second_element={<Search />} />: <SignIn />}
     </section>
   )
 }

@@ -4,7 +4,8 @@ export async function GET() {
     try {
         const posts = await db.grain.findMany({
             include: {
-                comments: true
+                comments: true,
+                author: true
             }
         })
 
