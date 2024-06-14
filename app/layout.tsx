@@ -10,6 +10,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { SessionProvider } from "next-auth/react"
 import {Session} from "next-auth"
 import Providers from "@/components/Providers"
+import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
   title: {
@@ -48,6 +49,7 @@ export default function RootLayout({ children }: RootLayoutProps, session: Sessi
               <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
                 <div className="relative flex min-h-screen flex-col">
                   <SiteHeader />
+                  <Toaster />
                   <div className="flex-1">{children}</div>
                 </div>
                 <TailwindIndicator />

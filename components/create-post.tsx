@@ -16,14 +16,19 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { CreatePostPayload } from "@/lib/validators/post";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast"
+import { ToastAction } from "@/components/ui/toast"
+
 
 const CreatePost = () => {
     const [input, setInput] = useState<string>("")
-    const[open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false)
+    const { toast } = useToast()
+    const router = useRouter()
 
-    const {mutate: createPost, isSuccess} = useMutation({
+    const { mutate: createPost, isSuccess } = useMutation({
         mutationFn: async () => {
-            const payload: CreatePostPayload= {
+            const payload: CreatePostPayload = {
                 content: input
             }
 
@@ -35,6 +40,13 @@ const CreatePost = () => {
     const handleClick = () => {
         const res = createPost()
         setOpen(false)
+        toast({
+            title: "Feed updated",
+            description: "Click here to view.",
+            action: (
+                <ToastAction onClick={() => {router.refresh()}} altText="Goto schedule to undo">View</ToastAction>
+            ),
+        })
     }
 
     return (
