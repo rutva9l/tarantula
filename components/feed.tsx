@@ -24,6 +24,7 @@ const getData = async () => {
 
 const Feed = async ({ type }: { type: string }) => {
     const data = await getData()
+    data.reverse()
 
     // const router = useRouter()
 

@@ -13,7 +13,11 @@ export async function GET(
                 }
             },
             include: {
-                grains: true
+                grains: {
+                    include: {
+                        author: true
+                    }
+                }
             }
         })
         return new Response(JSON.stringify(user))

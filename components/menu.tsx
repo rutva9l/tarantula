@@ -12,10 +12,12 @@ import { useSession } from "next-auth/react";
 import { Session } from 'next-auth';
 
 const DashboardMenu = (props: any) => {
+  const { data: session } = useSession()
+
   const menuList: MenuItem[] = [
-    { element: <Home className="mr-2" />, text: 'Home' },
-    { element: <User className="mr-2" />, text: 'Profile' },
-    { element: <Settings className="mr-2" />, text: 'Settings' },
+    { element: <Home className="mr-2" />, text: 'Home', link: '/' },
+    { element: <User className="mr-2" />, text: 'Profile', link: (session?.user ? ('/profile/'+session?.user.id) : '/')},
+    { element: <Settings className="mr-2" />, text: 'Settings', link: '/' },
   ]
 
   const handleActive = (text: String) => {
@@ -29,8 +31,6 @@ const DashboardMenu = (props: any) => {
       console.log(error)
     }
   }
-
-  const { data: session } = useSession()
 
   return (
     <Card className="col-span-2">
@@ -46,7 +46,7 @@ const DashboardMenu = (props: any) => {
         </Link>
       </CardHeader>
       <CardContent>
-        {menuList.map(item => <Link key={item.text} href="/"><div onClick={() => handleActive(item.text)} className="flex rounded-md p-2 py-3 hover:bg-gray-50 dark:hover:bg-[#1d283a]">{item.element} {item.text}</div></Link>)}
+        {menuList.map(item => <Link key={item.text} href={item.link}><div onClick={() => handleActive(item.text)} className="flex rounded-md p-2 py-3 hover:bg-gray-50 dark:hover:bg-[#1d283a]">{item.element} {item.text}</div></Link>)}
       </CardContent>
       <CardFooter>
         <Button onClick={handleSignOut}>Sign Out</Button>
