@@ -1,4 +1,5 @@
 import { CommentType } from "./comment"
+import { UserType } from "./user"
 
 export interface Posts {
     id: string,
@@ -6,5 +7,6 @@ export interface Posts {
     authorId: string,
     createdAt: string,
     updatedAt: string,
-    comments: CommentType[]
+    comments: CommentType[],
+    author: UserType
 }

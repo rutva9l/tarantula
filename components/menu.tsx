@@ -10,23 +10,26 @@ import AvatarSet from "./avatar"
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import { Session } from 'next-auth';
+import { useRouter } from "next/navigation";
 
 const DashboardMenu = (props: any) => {
   const { data: session } = useSession()
+  const router = useRouter()
 
   const menuList: MenuItem[] = [
-    { element: <Home className="mr-2" />, text: 'Home', link: '/' },
-    { element: <User className="mr-2" />, text: 'Profile', link: (session?.user ? ('/profile/'+session?.user.id) : '/')},
-    { element: <Settings className="mr-2" />, text: 'Settings', link: '/' },
+    { element: <Home className="mr-2" />, text: 'Home', link: '/', id: 1 },
+    { element: <User className="mr-2" />, text: 'Profile', link: (session?.user ? ('/profile/'+session?.user.id) : '/'), id: 2},
+    { element: <Settings className="mr-2" />, text: 'Settings', link: '/', id: 3 },
   ]
 
-  const handleActive = (text: String) => {
-    console.log("active", text)
+  const handleActive = (link: string) => {
+    router.push(link)
+
   }
 
   const handleSignOut = async () => {
     try {
-      await signOut('google')
+      await signOut()
     } catch (error) {
       console.log(error)
     }
@@ -38,7 +41,7 @@ const DashboardMenu = (props: any) => {
         <Link href={session?.user ? ('/profile/' + session?.user.id) : '/'}>
           <div className={"flex items-center cursor-pointer"}>
             <Avatar className={"relative flex shrink-0 overflow-hidden rounded-full mr-4 h-10 w-10"}>
-              <AvatarImage className="aspect-square h-full w-full" src={session?.user ? session?.user.image : "https://github.com/shadcn.png"} />
+              <AvatarImage className="aspect-square h-full w-full" src={ session?.user.image ? session?.user.image : "https://github.com/shadcn.png"} />
               <AvatarFallback className="AvatarFallback">CN</AvatarFallback>
             </Avatar>
             <CardTitle>{session?.user ? session?.user.name : "default"}</CardTitle>
@@ -46,7 +49,7 @@ const DashboardMenu = (props: any) => {
         </Link>
       </CardHeader>
       <CardContent>
-        {menuList.map(item => <Link key={item.text} href={item.link}><div onClick={() => handleActive(item.text)} className="flex rounded-md p-2 py-3 hover:bg-gray-50 dark:hover:bg-[#1d283a]">{item.element} {item.text}</div></Link>)}
+        {menuList.map(item => <div onClick={() => handleActive(item.link)} className="flex rounded-md p-2 py-3 hover:bg-gray-50 dark:hover:bg-[#1d283a]">{item.element} {item.text}</div>)}
       </CardContent>
       <CardFooter>
         <Button onClick={handleSignOut}>Sign Out</Button>

@@ -2,5 +2,6 @@ import { ReactElement } from "react"
 export interface MenuItem{
     element: ReactElement
     text: String,
-    link: Url
+    link: string,
+    id: number
 }

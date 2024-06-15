@@ -22,7 +22,7 @@ interface PostProps{
     type: String
 }
 
-const Post: FC<PostProps> = async ({ type, post }) => {
+const Post: FC<PostProps> = ({ type, post }) => {
 
     return (
         <Card className="mb-2">
