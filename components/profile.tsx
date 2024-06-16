@@ -47,7 +47,7 @@ const Profile = async ({ userId }: { userId: string }) => {
                         <div className="flex items-center mt-2">
                             <div className="text-sm mr-4">@{user.username}</div>
                             <div className="flex items-center">
-                                <CalendarDays size={14} className="text-zinc-900 dark:text-neutral-400" /> <div className="text-xs text-zinc-900 dark:text-neutral-400 p-2 text-muted-foreground">Joined May 2024</div>
+                                <CalendarDays size={14} className="text-zinc-900 dark:text-neutral-400" /> <div className="text-xs text-zinc-900 dark:text-neutral-400 p-2">Joined May 2024</div>
                             </div>
                         </div>
                     </div>
