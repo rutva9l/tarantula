@@ -52,7 +52,7 @@ const CreatePost = () => {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button className={buttonVariants({ variant: "constructive" }) + " mb-4 py-3 px-4"}>Create Post</Button>
+                <Button className={buttonVariants({ variant: "constructive" }) + " mb-4"}>Create Post</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[50%]">
                 <DialogHeader>

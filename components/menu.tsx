@@ -22,7 +22,7 @@ const DashboardMenu = (props: any) => {
     { element: <Settings className="mr-2" />, text: 'Settings', link: '/', id: 3 },
   ]
 
-  const handleActive = (link: string) => {
+  const handleActive = (link: String) => {
     router.push(link)
 
   }

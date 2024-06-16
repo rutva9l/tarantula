@@ -18,7 +18,8 @@ export async function GET(
             include: {
                 grains: {
                     include: {
-                        author: true
+                        author: true,
+                        comments: true
                     }
                 }
             }

@@ -1,6 +1,6 @@
 "use client"
 
-import { Separator } from "@radix-ui/react-separator"
+import { Separator } from "./ui/separator"
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 import { CalendarDays } from "lucide-react"
 import Post from "./post"
@@ -13,7 +13,7 @@ import { useQuery } from '@tanstack/react-query';
 import EditProfile from "./edit-profile"
 
 const getUser = async (userId: string) => {
-    const { data } = await axios.get('http://localhost:3000/api/user/'+userId)
+    const { data } = await axios.get('http://localhost:3000/api/user/' + userId)
     return data as UserType
 }
 
@@ -44,16 +44,18 @@ const Profile = async ({ userId }: { userId: string }) => {
                 <div className="mb-3 flex items-center justify-between">
                     <div>
                         <AvatarSet type="profile" user={user} />
-                        <div className="mt-2 text-sm">@{user.username}</div>
+                        <div className="flex items-center mt-2">
+                            <div className="text-sm mr-4">@{user.username}</div>
+                            <div className="flex items-center">
+                                <CalendarDays size={14} className="text-zinc-900 dark:text-neutral-400" /> <div className="text-xs text-zinc-900 dark:text-neutral-400 p-2 text-muted-foreground">Joined May 2024</div>
+                            </div>
+                        </div>
                     </div>
                     <EditProfile />
                 </div>
-                <div className="flex items-center">
-                    <CalendarDays size={16} className="mr-1" /> <div className="text-xs text-zinc-900 dark:text-slate-50 p-2">Joined May 2024</div>
-                </div>
-                <Separator className="h-[1px]" />
-                {/* <CreatePost /> */}
-                <div className="mt-4">{user.grains.map(item => <Post type="collapsed" key={item.id} post={item} />)}</div>
+                <Separator className="h-[1px] mb-4" />
+                <CreatePost />
+                <div>{user.grains.map(item => <Post type="collapsed" key={item.id} post={item} />)}</div>
             </CardContent>
         </Card>
     )
