@@ -47,7 +47,7 @@ const DashboardMenu = (props: any) => {
         </Link>
       </CardHeader>
       <CardContent>
-        {menuList.map(item => <div onClick={() => handleActive(item.link)} className="flex rounded-md p-2 py-3 hover:bg-gray-50 dark:hover:bg-[#1d283a] cursor-pointer">{item.element} {item.text}</div>)}
+        {menuList.map(item => <div key={item.id} onClick={() => handleActive(item.link)} className="flex rounded-md p-2 py-3 hover:bg-gray-50 dark:hover:bg-[#1d283a] cursor-pointer">{item.element} {item.text}</div>)}
       </CardContent>
       <CardFooter>
         <Button onClick={handleSignOut}>Sign Out</Button>

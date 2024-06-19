@@ -11,8 +11,8 @@ import {
 } from "@/components/ui/dialog"
 import { Textarea } from "./ui/textarea";
 import { Button, buttonVariants } from "./ui/button";
-import { useEffect, useState } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { CreatePostPayload } from "@/lib/validators/post";
 import { useRouter } from "next/navigation";
@@ -20,11 +20,12 @@ import { useToast } from "@/components/ui/use-toast"
 import { ToastAction } from "@/components/ui/toast"
 
 
-const CreatePost = () => {
+const CreatePost = ({ created, onClick }: { created: boolean, onClick: () => void }) => {
     const [input, setInput] = useState<string>("")
     const [open, setOpen] = useState(false)
     const { toast } = useToast()
     const router = useRouter()
+    const queryClient = useQueryClient()
 
     const { mutate: createPost, isSuccess } = useMutation({
         mutationFn: async () => {
@@ -35,16 +36,20 @@ const CreatePost = () => {
             const { data } = await axios.post('/api/grain/create', payload)
             return data as String
         },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['postData'] })
+        }
     })
 
     const handleClick = () => {
         const res = createPost()
         setOpen(false)
+        onClick()
         toast({
             title: "Feed updated",
             description: "Click here to view.",
             action: (
-                <ToastAction onClick={() => {router.refresh()}} altText="Goto schedule to undo">View</ToastAction>
+                <ToastAction onClick={() => { router.refresh() }} altText="Goto schedule to undo">View</ToastAction>
             ),
         })
     }

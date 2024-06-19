@@ -10,33 +10,55 @@ import Post from "@/components/post";
 import CreatePost from "./create-post";
 import axios from "axios"
 import { Posts } from "@/types/post";
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 
 const getData = async () => {
     const { data } = await axios.get('http://localhost:3000/api/grain')
     return data as Posts[]
 }
 
-const Feed = async ({ type }: { type: string }) => {
-    const data = await getData()
-    data.reverse()
+const Feed = ({ type }: { type: string }) => {
+    const [created, setCreated] = useState<boolean>(false)
+    // const data = await getData()
+
+    const { isLoading, error, data } = useQuery({
+        queryKey: ['postData'],
+        queryFn: () =>
+            fetch('http://localhost:3000/api/grain').then((res) =>
+                res.json(),
+            ),
+    })
+
+    const posts: Posts[] = data
+    // posts.reverse()
+    console.log(posts)
+
+    const handleClick = () => {
+        setCreated(!created)
+    }
+
+    // if (postQuery.isError) return <h1>Error loading posts!!!</h1>;ß
 
     // const router = useRouter()
 
-    // const singlePost: Posts = data.forEach(item=>{ return item.authorId = router.query.postId?})
+    // const singlePost: Posts = posts.forEach(item=>{ return item.authorId = router.query.postId?})
+    if (isLoading) return <Card className="col-span-5"><CardHeader>
+        <CardTitle>
+            Loading...
+        </CardTitle>
+    </CardHeader></Card>;
 
-    return (
-        <>
-        <Card className="col-span-5">
-            <CardHeader>
-                <CardTitle>Your Feed</CardTitle>
-            </CardHeader>
-            <CardContent>
-                    <CreatePost />
-                    {data.map(item => <Post type="collapsed" key={item.id} post={item} />)}
-            </CardContent>
-        </Card>
-        </>
-    )
+    if (!isLoading) return <Card className="col-span-5 max-h-full relative">
+        <CardHeader>
+            <CardTitle>Your Feed</CardTitle>
+        </CardHeader>
+        <CardContent className="max-h-full overflow-hidden">
+            <CreatePost created={created} onClick={handleClick} />
+            {posts.slice(0).reverse().map(item => <Post type="collapsed" key={item.id} post={item} />)}
+        </CardContent>
+    </Card>;
+
 }
 
 export default Feed

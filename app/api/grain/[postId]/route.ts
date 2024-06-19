@@ -36,3 +36,22 @@ export async function GET(
 
     }
 }
+
+export async function DELETE(
+    request: Request,
+    { params }: { params: { postId: string } }
+) {
+    try {
+        const { postId } = params;
+        const deletedPost = await db.grain.delete({
+            where: {
+                id: postId
+            }
+        })
+        
+        return new Response('ok')
+    } catch (error) {
+        return new Response("Could not retrieve.", { status: 500 })
+
+    }
+}

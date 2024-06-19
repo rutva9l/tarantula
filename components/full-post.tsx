@@ -1,5 +1,3 @@
-'use client'
-
 import Post from "./post"
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 import { Posts } from "@/types/post"
