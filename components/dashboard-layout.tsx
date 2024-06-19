@@ -1,5 +1,4 @@
 import DashboardMenu from "@/components/menu";
-import { ReactElement } from "react";
 
 
 export default function DashboardLayout(props: any) {

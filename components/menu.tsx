@@ -6,10 +6,8 @@ import { MenuItem } from "@/types/menu";
 import { Button } from "./ui/button";
 import { Home, User, Settings } from "lucide-react"
 import Link from "next/link";
-import AvatarSet from "./avatar"
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
-import { Session } from 'next-auth';
 import { useRouter } from "next/navigation";
 
 const DashboardMenu = (props: any) => {

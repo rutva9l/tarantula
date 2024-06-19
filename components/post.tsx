@@ -1,16 +1,12 @@
 "use client"
 
-import { Card, CardHeader, CardContent, CardTitle, CardFooter } from "./ui/card"
-import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar"
+import { Card, CardHeader, CardContent, CardFooter } from "./ui/card"
 import { Separator } from "./ui/separator"
 import { MessageSquare, Forward } from "lucide-react"
-import { Input } from "./ui/input"
-import { Button } from './ui/button'
 import AvatarSet from "./avatar"
 import Comment from "./comment"
 import Link from "next/link"
 import { Posts } from "@/types/post"
-import axios from "axios"
 import CommentInput from "./comment-input"
 import { UserType } from "@/types/user"
 import { FC } from "react"

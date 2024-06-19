@@ -7,9 +7,7 @@ import Post from "./post"
 import AvatarSet from "./avatar"
 import axios from "axios"
 import { UserType } from "@/types/user"
-import { useSession } from "next-auth/react"
 import CreatePost from "./create-post"
-import { useQuery } from '@tanstack/react-query';
 import EditProfile from "./edit-profile"
 
 const getUser = async (userId: string) => {

@@ -3,15 +3,13 @@
 import {
     Card,
     CardContent,
-    CardDescription,
     CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { signIn } from "next-auth/react"
-import Link from "next/link"
 
 
 export function SignIn() {

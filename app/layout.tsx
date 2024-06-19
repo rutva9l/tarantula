@@ -7,8 +7,6 @@ import { cn } from "@/lib/utils"
 import { SiteHeader } from "@/components/site-header"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
-import { SessionProvider } from "next-auth/react"
-import {Session} from "next-auth"
 import Providers from "@/components/Providers"
 import { Toaster } from "@/components/ui/toaster"
 
@@ -33,7 +31,7 @@ interface RootLayoutProps {
   children: React.ReactNode
 }
 
-export default function RootLayout({ children }: RootLayoutProps, session: Session) {
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
       <html lang="en" suppressHydrationWarning>

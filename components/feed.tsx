@@ -1,21 +1,15 @@
 'use client'
 
-import { SiteHeader } from "@/components/site-header";
 import {
     Card,
     CardContent,
-    CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { Button, buttonVariants } from "@/components/ui/button";
 import Post from "@/components/post";
 import CreatePost from "./create-post";
-import { useEffect, useState } from "react"
 import axios from "axios"
 import { Posts } from "@/types/post";
-import { useRouter } from 'next/router';
 
 const getData = async () => {
     const { data } = await axios.get('http://localhost:3000/api/grain')

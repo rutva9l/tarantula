@@ -1,7 +1,6 @@
 
 import FullPost from '@/components/full-post';
-import DashboardLayout from '../../../components/dashboard-layout';
-import Search from '@/components/search';
+import DashboardLayout from '@/components/dashboard-layout';
 
 const PostPage = ({ params }: { params: { slug: string } }) => {
     return (
