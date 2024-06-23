@@ -4,7 +4,7 @@ import { Posts } from "@/types/post"
 import axios from "axios"
 
 const getData = async (id: string) => {
-    const { data } = await axios.get('http://localhost:3000/api/grain/' + id)
+    const { data } = await axios.get('/api/grain/' + id)
     return data as Posts
 }
 

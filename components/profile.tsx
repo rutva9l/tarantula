@@ -28,7 +28,7 @@ const Profile = ({ userId }: { userId: string }) => {
     const { isLoading, error, data } = useQuery({
         queryKey: ['repoData'],
         queryFn: () =>
-            fetch('http://localhost:3000/api/user/' + userId).then((res) =>
+            fetch('/api/user/' + userId).then((res) =>
                 res.json(),
             ),
     })

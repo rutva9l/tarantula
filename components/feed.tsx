@@ -25,7 +25,7 @@ const Feed = ({ type }: { type: string }) => {
     const { isLoading, error, data } = useQuery({
         queryKey: ['postData'],
         queryFn: () =>
-            fetch('http://localhost:3000/api/grain').then((res) =>
+            fetch('/api/grain').then((res) =>
                 res.json(),
             ),
     })
