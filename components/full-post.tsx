@@ -1,27 +1,33 @@
+'use client'
+
 import Post from "./post"
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 import { Posts } from "@/types/post"
-import axios from "axios"
+import { useQuery } from "@tanstack/react-query"
 
-const getData = async (id: string) => {
-    const { data } = await axios.get('/api/grain/' + id)
-    return data as Posts
-}
+const FullPost = ({ params }: { params: any }) => {
+    // const data = await getData(params.postId)
 
-const FullPost = async ({ params }: {params: any}) => {
-    const data = await getData(params.postId)
+    const { isLoading, error, data } = useQuery({
+        queryKey: ['singlePost'],
+        queryFn: () =>
+            fetch('/api/grain/' + params.postId).then((res) =>
+                res.json(),
+            ),
+    })
+
     console.log(data)
 
-    return (
-        <Card className="col-span-5">
-            <CardHeader>
-                <CardTitle>Post</CardTitle>
-            </CardHeader>
-            <CardContent>
-                <Post type="expanded" post={data}/>
-            </CardContent>
-        </Card>
-    )
+    if (isLoading) return <Card className="col-span-5">Loading</Card>;
+
+    if (!isLoading) return <Card className="col-span-5">
+        <CardHeader>
+            <CardTitle>Post</CardTitle>
+        </CardHeader>
+        <CardContent>
+            <Post type="expanded" post={data} />
+        </CardContent>
+    </Card>;
 }
 
 export default FullPost

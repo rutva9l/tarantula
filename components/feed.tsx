@@ -8,15 +8,9 @@ import {
 } from "@/components/ui/card"
 import Post from "@/components/post";
 import CreatePost from "./create-post";
-import axios from "axios"
 import { Posts } from "@/types/post";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-
-const getData = async () => {
-    const { data } = await axios.get('http://localhost:3000/api/grain')
-    return data as Posts[]
-}
 
 const Feed = ({ type }: { type: string }) => {
     const [created, setCreated] = useState<boolean>(false)

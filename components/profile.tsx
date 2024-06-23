@@ -5,7 +5,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 import { CalendarDays } from "lucide-react"
 import Post from "./post"
 import AvatarSet from "./avatar"
-import axios from "axios"
 import { UserType } from "@/types/user"
 import CreatePost from "./create-post"
 import EditProfile from "./edit-profile"
@@ -13,11 +12,6 @@ import { useQuery } from "@tanstack/react-query"
 import { useSession } from "next-auth/react";
 import { Button } from './ui/button'
 import { useState } from "react"
-
-const getUser = async (userId: string) => {
-    const { data } = await axios.get('http://localhost:3000/api/user/' + userId)
-    return data as UserType
-}
 
 
 const Profile = ({ userId }: { userId: string }) => {
