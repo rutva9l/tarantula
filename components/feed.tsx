@@ -24,6 +24,10 @@ const Feed = ({ type }: { type: string }) => {
             ),
     })
 
+    // const x: Posts[] = data
+
+    // const [posts, setPosts] = useState<Posts[]>(x)
+
     const posts: Posts[] = data
     // posts.reverse()
     console.log(posts)

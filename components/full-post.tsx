@@ -18,7 +18,7 @@ const FullPost = ({ params }: { params: any }) => {
 
     console.log(data)
 
-    if (isLoading) return <Card className="col-span-5">Loading</Card>;
+    if (isLoading) return <Card className="col-span-5 p-4">Loading</Card>;
 
     if (!isLoading) return <Card className="col-span-5">
         <CardHeader>

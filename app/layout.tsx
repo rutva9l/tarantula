@@ -9,6 +9,14 @@ import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
 import Providers from "@/components/Providers"
 import { Toaster } from "@/components/ui/toaster"
+import type { Viewport } from 'next'
+ 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
+}
 
 export const metadata: Metadata = {
   title: {
@@ -16,10 +24,6 @@ export const metadata: Metadata = {
     template: `%s - ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
-  ],
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon-16x16.png",
@@ -38,17 +42,17 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body
           className={cn(
-            "min-h-screen bg-background font-sans antialiased",
+            "h-screen bg-background font-sans antialiased",
             fontSans.className
           )}
         >
 
             <Providers>
               <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-                <div className="relative flex min-h-screen flex-col">
+                <div className="h-ful relative flex flex-col">
                   <SiteHeader />
                   <Toaster />
-                  <div className="flex-1">{children}</div>
+                  <div className="h-full flex-1">{children}</div>
                 </div>
                 <TailwindIndicator />
               </ThemeProvider>
